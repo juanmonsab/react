@@ -1,7 +1,5 @@
-
-
-
-
+import React, { useState } from "react";
+import { FormularioEstudiante } from "./FormularioEstudiante";
 
 export const TablaEstudiante = ({ listaEstudiantes }) => {
 
