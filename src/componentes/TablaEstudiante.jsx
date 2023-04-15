@@ -5,6 +5,8 @@ export const TablaEstudiante = ({ listaEstudiantes }) => {
 
     const [busqueda, setBusqueda] = useState("");
         
+    const [estudianteEditar, setEstudianteEditar] = useState(null);
+
     }
     return (
         <>
