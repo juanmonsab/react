@@ -9,6 +9,10 @@ export const TablaEstudiante = ({ listaEstudiantes }) => {
     const handleChange = (event) => {
         setBusqueda(event.target.value);
       }
+    
+      const handleEditar = (estudiante) => {
+        setEstudianteEditar(estudiante);
+      }
 
     }
     return (
