@@ -1,29 +1,18 @@
 import { useState } from "react"
 
-
-
-
-
-
 export const FormularioEstudiante = ({ agregar }) => {
     const [id, setId] = useState("");
     const [nombre, setNombre] = useState("");
     const [semestre, setSemestre] = useState("");
 
-    const guardarEstudiante = (event) => {
-        event.preventDefault();
-
-        let estudiante = {
-            id: id,
-            nombre: nombre,
-            semestre: semestre
+    useEffect(() => {
+        if (estudianteEditar) {
+            setId(estudianteEditar.id);
+            setNombre(estudianteEditar.nombre);
+            setSemestre(estudianteEditar.semestre);
         }
-        agregar(estudiante)
-        setId("");
-        setNombre("");
-        setSemestre("");
-    }
-
+    }, [estudianteEditar]);
+    
     return (
         <>
             <form onSubmit={guardarEstudiante}>
