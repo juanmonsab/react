@@ -26,10 +26,17 @@ export const EstudiantesApp = () => {
         setEstudiantes(nuevosEstudiantes);
     };
 
+    const eliminarEstudiante = (id) => {
+        const nuevosEstudiantes = estudiantes.filter(
+            (estudiante) => estudiante.id !== id
+        );
+        setEstudiantes(nuevosEstudiantes);
+    };
+
     return (
         <>
             <FormularioEstudiante agregar={(estu) => { agregarEstudiante(estu) }} />
             <TablaEstudiante listaEstudiantes={estudiantes} />
         </>
     )
-}
+} 
