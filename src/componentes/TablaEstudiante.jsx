@@ -3,9 +3,12 @@ import { FormularioEstudiante } from "./FormularioEstudiante";
 
 export const TablaEstudiante = ({ listaEstudiantes }) => {
 
-    const [busqueda, setBusqueda] = useState("");
-        
+    const [busqueda, setBusqueda] = useState("");   
     const [estudianteEditar, setEstudianteEditar] = useState(null);
+
+    const handleChange = (event) => {
+        setBusqueda(event.target.value);
+      }
 
     }
     return (
