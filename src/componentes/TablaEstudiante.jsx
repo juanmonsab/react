@@ -3,7 +3,7 @@ import { FormularioEstudiante } from "./FormularioEstudiante";
 
 export const TablaEstudiante = ({ listaEstudiantes }) => {
 
-    const editar=()=>{
+    const [busqueda, setBusqueda] = useState("");
         
     }
     return (
