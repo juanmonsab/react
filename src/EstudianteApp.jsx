@@ -35,8 +35,8 @@ export const EstudiantesApp = () => {
 
     return (
         <>
-            <FormularioEstudiante agregar={(estu) => { agregarEstudiante(estu) }} />
-            <TablaEstudiante listaEstudiantes={estudiantes} />
+            <FormularioEstudiante agregar={agregarEstudiante} actualizarEstudiante={actualizarEstudiante} />
+            <TablaEstudiante listaEstudiantes={estudiantes} actualizarEstudiante={actualizarEstudiante} eliminarEstudiante={eliminarEstudiante} />
         </>
     )
 } 
