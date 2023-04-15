@@ -14,6 +14,10 @@ export const TablaEstudiante = ({ listaEstudiantes }) => {
         setEstudianteEditar(estudiante);
       }
 
+      const handleEliminar = (id) => {
+        eliminarEstudiante(id);
+      }
+
     }
     return (
         <>
