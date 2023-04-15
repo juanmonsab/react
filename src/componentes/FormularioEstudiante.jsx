@@ -17,6 +17,20 @@ export const FormularioEstudiante = ({ agregar }) => {
         event.preventDefault();
         let estudiante = { id: id, nombre: nombre, semestre: semestre };
     
+        if (estudianteEditar) {
+            actualizarEstudiante(estudianteEditar.id, estudiante);
+            setEstudianteEditar(null);
+            setId("");
+            setNombre("");
+            setSemestre("");
+        } else {
+            agregar(estudiante);
+            setId("");
+            setNombre("");
+            setSemestre("");
+        }
+    };
+    
     return (
         <>
             <form onSubmit={guardarEstudiante}>
