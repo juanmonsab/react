@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormularioEstudiante } from "./FormularioEstudiante";
 
-export const TablaEstudiante = ({ listaEstudiantes }) => {
+export const TablaEstudiante = ({ listaEstudiantes, actualizarEstudiante, eliminarEstudiante }) => {
 
     const [busqueda, setBusqueda] = useState("");
     const [estudianteEditar, setEstudianteEditar] = useState(null);
@@ -21,7 +21,6 @@ export const TablaEstudiante = ({ listaEstudiantes }) => {
     const estudiantesFiltrados = listaEstudiantes.filter((estudiante) => {
         return estudiante.nombre.toLowerCase().includes(busqueda.toLowerCase());
     });
-
 
     return (
         <>
