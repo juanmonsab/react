@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const FormularioEstudiante = ({ agregar }) => {
+export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudianteEditar, setEstudianteEditar }) => {
     const [id, setId] = useState("");
     const [nombre, setNombre] = useState("");
     const [semestre, setSemestre] = useState("");
