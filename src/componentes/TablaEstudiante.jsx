@@ -18,6 +18,10 @@ export const TablaEstudiante = ({ listaEstudiantes }) => {
         eliminarEstudiante(id);
       }
 
+      const estudiantesFiltrados = listaEstudiantes.filter((estudiante) => {
+        return estudiante.nombre.toLowerCase().includes(busqueda.toLowerCase());
+      });
+
     }
     return (
         <>
