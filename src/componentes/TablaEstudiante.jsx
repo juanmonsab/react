@@ -39,3 +39,8 @@ export const TablaEstudiante = ({ listaEstudiantes }) => {
           </tr>
         </thead>
         <tbody>
+        {estudiantesFiltrados.map((estudiante) => (
+            <tr key={estudiante.id}>
+              <td>{estudiante.id}</td>
+              <td>{estudiante.nombre}</td>
+              <td>{estudiante.semestre}</td>
