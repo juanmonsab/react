@@ -44,3 +44,15 @@ export const TablaEstudiante = ({ listaEstudiantes }) => {
               <td>{estudiante.id}</td>
               <td>{estudiante.nombre}</td>
               <td>{estudiante.semestre}</td>
+              <td>
+                <button className="btn btn-info mr-2" onClick={() => handleEditar(estudiante)}>
+                  Editar
+                </button>
+                <button className="btn btn-danger" onClick={() => handleEliminar(estudiante.id)}>
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
