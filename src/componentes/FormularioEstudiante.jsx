@@ -12,6 +12,10 @@ export const FormularioEstudiante = ({ agregar }) => {
             setSemestre(estudianteEditar.semestre);
         }
     }, [estudianteEditar]);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        let estudiante = { id: id, nombre: nombre, semestre: semestre };
     
     return (
         <>
