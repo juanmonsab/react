@@ -15,10 +15,6 @@ export const EstudiantesApp = () => {
         setEstudiantes([...estudiantes, estudiante])
     }
 
-    const agregarEstudiante = (estudiante) => {
-        setEstudiantes([...estudiantes, estudiante])
-    }
-
     const actualizarEstudiante = (id, estudianteActualizado) => {
         const nuevosEstudiantes = estudiantes.map((estudiante) =>
             estudiante.id === id ? estudianteActualizado : estudiante
