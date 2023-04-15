@@ -15,6 +15,10 @@ export const EstudiantesApp = () => {
         setEstudiantes([...estudiantes, estudiante])
     }
 
+    const agregarEstudiante = (estudiante) => {
+        setEstudiantes([...estudiantes, estudiante])
+    }
+
     return (
         <>
             <FormularioEstudiante agregar={(estu) => { agregarEstudiante(estu) }} />
