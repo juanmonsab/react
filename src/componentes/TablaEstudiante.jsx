@@ -28,3 +28,14 @@ export const TablaEstudiante = ({ listaEstudiantes }) => {
       <div className="mb-3">
         <input type="text" className="form-control" placeholder="Buscar por nombre" onChange={handleChange} value={busqueda} />
       </div>
+
+      table className="table">
+        <thead>
+          <tr>
+            <th scope="col">ID Estudiante</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Semestre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
