@@ -4,6 +4,7 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
     const [id, setId] = useState("");
     const [nombre, setNombre] = useState("");
     const [semestre, setSemestre] = useState("");
+    const [facultad, setfacultad] =useState("");
 
     useEffect(() => {
         if (estudianteEditar) {
