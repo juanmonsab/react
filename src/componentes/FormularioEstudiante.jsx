@@ -88,18 +88,6 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
                 </div>
                 <div className="form-group">
                     <label htmlFor="semestre">Semestre</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="semestre"
-                        placeholder="Ingrese semestre"
-                        value={semestre}
-                        onChange={(event) => setSemestre(event.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="semestre">Semestre</label>
                     <select
                         className="form-control"
                         id="semestre"
