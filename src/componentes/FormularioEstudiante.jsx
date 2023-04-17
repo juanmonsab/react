@@ -17,6 +17,17 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!/^\d{6,10}$/.test(id)) {
+            alert("El ID debe ser un número de 6 a 10 dígitos.");
+            return;
+        }
+
+        if (nombre.length < 3) {
+            alert("El nombre debe tener al menos 3 caracteres.");
+            return;
+        }
+
         let estudiante = { id: id, nombre: nombre, semestre: semestre };
 
         if (estudianteEditar) {
