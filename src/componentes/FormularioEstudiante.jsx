@@ -36,11 +36,15 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
             setId("");
             setNombre("");
             setSemestre("");
+            setFacultad("");
+
         } else {
             agregar(estudiante);
             setId("");
             setNombre("");
             setSemestre("");
+            setFacultad("");
+
         }
     };
 
