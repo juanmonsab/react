@@ -11,6 +11,7 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
             setId(estudianteEditar.id);
             setNombre(estudianteEditar.nombre);
             setSemestre(estudianteEditar.semestre);
+            setFacultad(estudianteEditar.facultad);
         }
     }, [estudianteEditar]);
 
