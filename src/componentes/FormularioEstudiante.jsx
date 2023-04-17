@@ -48,6 +48,17 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
         }
     };
 
+    const handleDelete = () => {
+        if (window.confirm(`¿Estás seguro que deseas eliminar el estudiante ${nombre}?`)) {
+            actualizarEstudiante(id, null);
+            setEstudianteEditar(null);
+            setId("");
+            setNombre("");
+            setSemestre("");
+            setFacultad("");
+        }
+    };
+
     return (
         <>
             <form onSubmit={handleSubmit}>
