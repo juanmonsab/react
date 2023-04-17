@@ -4,18 +4,31 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
     const [id, setId] = useState("");
     const [nombre, setNombre] = useState("");
     const [semestre, setSemestre] = useState("");
+    const [facultad, setFacultad] = useState("");
 
     useEffect(() => {
         if (estudianteEditar) {
             setId(estudianteEditar.id);
             setNombre(estudianteEditar.nombre);
             setSemestre(estudianteEditar.semestre);
+            setFacultad(estudianteEditar.facultad);
         }
     }, [estudianteEditar]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let estudiante = { id: id, nombre: nombre, semestre: semestre };
+
+        if (!/^\d{6,10}$/.test(id)) {
+            alert("El ID debe ser un número de 6 a 10 dígitos.");
+            return;
+        }
+
+        if (nombre.length < 3) {
+            alert("El nombre debe tener al menos 3 caracteres.");
+            return;
+        }
+
+        let estudiante = { id: id, nombre: nombre, semestre: semestre, facultad: facultad };
 
         if (estudianteEditar) {
             actualizarEstudiante(estudianteEditar.id, estudiante);
@@ -23,11 +36,26 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
             setId("");
             setNombre("");
             setSemestre("");
+            setFacultad("");
+
         } else {
             agregar(estudiante);
             setId("");
             setNombre("");
             setSemestre("");
+            setFacultad("");
+
+        }
+    };
+
+    const handleDelete = () => {
+        if (window.confirm(`¿Estás seguro que deseas eliminar el estudiante ${nombre}?`)) {
+            actualizarEstudiante(id, null);
+            setEstudianteEditar(null);
+            setId("");
+            setNombre("");
+            setSemestre("");
+            setFacultad("");
         }
     };
 
@@ -60,33 +88,43 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
                 </div>
                 <div className="form-group">
                     <label htmlFor="semestre">Semestre</label>
-                    <input
-                        type="text"
+                    <select
                         className="form-control"
                         id="semestre"
-                        placeholder="Ingrese semestre"
                         value={semestre}
                         onChange={(event) => setSemestre(event.target.value)}
                         required
-                    />
+                    >
+                        <option value="">Selecciona una opción</option>
+                        {Array.from({ length: 10 }, (_, i) => i + 1).map((semestre) => (
+                            <option value={semestre} key={semestre}>
+                                {semestre}
+                            </option>
+                        ))}
+                    </select>
                 </div>
-                {estudianteEditar ? (
-                    <div>
-                        <button type="submit" className="btn btn-primary">
-                            Actualizar
-                        </button>
-                        <button type="button" className="btn btn-secondary ml-2" onClick={() => {
-                            setEstudianteEditar(null);
-                            setId("");
-                            setNombre("");
-                            setSemestre("");
-                        }}>
-                            Cancelar
-                        </button>
-                    </div>
-                ) : (
-                    <button type="submit" className="btn btn-primary">
-                        Registrar
+                <div className="form-group">
+                    <label htmlFor="facultad">Facultad</label>
+                    <select
+                        className="form-control"
+                        id="facultad"
+                        value={facultad}
+                        onChange={(event) => setFacultad(event.target.value)}
+                        required
+                    >
+                        <option value="">Selecciona una opción</option>
+                        <option value="Ingeniería">Ingeniería</option>
+                        <option value="Ciencias">Ciencias</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Humanidades">Humanidades</option>
+                    </select>
+                </div>
+                <button type="submit" className="btn btn-primary">
+                    {estudianteEditar ? "Actualizar" : "Agregar"}
+                </button>
+                {estudianteEditar && (
+                    <button type="button" className="btn btn-danger ml-2" onClick={handleDelete}>
+                        Eliminar
                     </button>
                 )}
             </form>
