@@ -34,6 +34,7 @@ export const TablaEstudiante = ({ listaEstudiantes, actualizarEstudiante, elimin
                         <th scope="col">ID Estudiante</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Semestre</th>
+                        <th scope="col">Facultad</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -43,6 +44,7 @@ export const TablaEstudiante = ({ listaEstudiantes, actualizarEstudiante, elimin
                             <td>{estudiante.id}</td>
                             <td>{estudiante.nombre}</td>
                             <td>{estudiante.semestre}</td>
+                            <td>{estudiante.facultad}</td>
                             <td>
                                 <button className="btn btn-info mr-2" onClick={() => handleEditar(estudiante)}>
                                     Editar
