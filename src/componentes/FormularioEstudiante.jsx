@@ -4,7 +4,7 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
     const [id, setId] = useState("");
     const [nombre, setNombre] = useState("");
     const [semestre, setSemestre] = useState("");
-    const [facultad, setfacultad] =useState("");
+    const [facultad, setFacultad] = useState("");
 
     useEffect(() => {
         if (estudianteEditar) {
@@ -28,7 +28,7 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
             return;
         }
 
-        let estudiante = { id: id, nombre: nombre, semestre: semestre };
+        let estudiante = { id: id, nombre: nombre, semestre: semestre, facultad: facultad };
 
         if (estudianteEditar) {
             actualizarEstudiante(estudianteEditar.id, estudiante);
@@ -98,23 +98,45 @@ export const FormularioEstudiante = ({ agregar, actualizarEstudiante, estudiante
                         required
                     />
                 </div>
-                {estudianteEditar ? (
-                    <div>
-                        <button type="submit" className="btn btn-primary">
-                            Actualizar
-                        </button>
-                        <button type="button" className="btn btn-secondary ml-2" onClick={() => {
-                            setEstudianteEditar(null);
-                            setId("");
-                            setNombre("");
-                            setSemestre("");
-                        }}>
-                            Cancelar
-                        </button>
-                    </div>
-                ) : (
-                    <button type="submit" className="btn btn-primary">
-                        Registrar
+                <div className="form-group">
+                    <label htmlFor="semestre">Semestre</label>
+                    <select
+                        className="form-control"
+                        id="semestre"
+                        value={semestre}
+                        onChange={(event) => setSemestre(event.target.value)}
+                        required
+                    >
+                        <option value="">Selecciona una opción</option>
+                        {Array.from({ length: 10 }, (_, i) => i + 1).map((semestre) => (
+                            <option value={semestre} key={semestre}>
+                                {semestre}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="facultad">Facultad</label>
+                    <select
+                        className="form-control"
+                        id="facultad"
+                        value={facultad}
+                        onChange={(event) => setFacultad(event.target.value)}
+                        required
+                    >
+                        <option value="">Selecciona una opción</option>
+                        <option value="Ingeniería">Ingeniería</option>
+                        <option value="Ciencias">Ciencias</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Humanidades">Humanidades</option>
+                    </select>
+                </div>
+                <button type="submit" className="btn btn-primary">
+                    {estudianteEditar ? "Actualizar" : "Agregar"}
+                </button>
+                {estudianteEditar && (
+                    <button type="button" className="btn btn-danger ml-2" onClick={handleDelete}>
+                        Eliminar
                     </button>
                 )}
             </form>
