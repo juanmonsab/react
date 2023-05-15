@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { useEffect } from "react"
 import { FormularioEstudiante } from "./componentes/FormularioEstudiante";
 import { TablaEstudiante } from "./componentes/TablaEstudiante";
+import { getEstudiantes } from "./peticiones/getEstudiantes";
+import { postEstudiantes } from "./peticiones/postEstudiantes";
 
 
 
@@ -13,7 +16,17 @@ export const EstudiantesApp = () => {
 
     const agregarEstudiante = (estudiante) => {
         setEstudiantes([...estudiantes, estudiante])
+        postEstudiantes(estudiante);
     }
+
+    const cargueEstudiantes = async () => {
+        const datos = await getEstudiantes()
+        setEstudiantes(datos);
+    }
+
+    useEffect(()=>{
+        cargueEstudiantes();
+    },[])
 
     const actualizarEstudiante = (id, estudianteActualizado) => {
         const nuevosEstudiantes = estudiantes.map((estudiante) =>
