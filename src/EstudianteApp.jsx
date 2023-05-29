@@ -1,51 +1,97 @@
-import { useState } from "react"
-import { useEffect } from "react"
+import React, { useState } from "react";
 import { FormularioEstudiante } from "./componentes/FormularioEstudiante";
 import { TablaEstudiante } from "./componentes/TablaEstudiante";
-import { getEstudiantes } from "./peticiones/getEstudiantes";
-import { postEstudiantes } from "./peticiones/postEstudiantes";
-
-
-
-//<ListaEstudiantes lista={estudiantes}/>
+import { FormularioTutoria } from "./componentes/FormularioTutoria";
+import { TablaTutoria } from "./componentes/TablaTutoria";
 
 export const EstudiantesApp = () => {
+  const [estudiantes, setEstudiantes] = useState([]);
+  const [tutorias, setTutorias] = useState([]);
+  const [activeTab, setActiveTab] = useState("registroEstudiante");
 
-    const [estudiantes, setEstudiantes] = useState([]);
-    console.log(estudiantes);
+  const handleAgregarEstudiante = (estudiante) => {
+    setEstudiantes([...estudiantes, estudiante]);
+  };
 
-    const agregarEstudiante = (estudiante) => {
-        setEstudiantes([...estudiantes, estudiante])
-        postEstudiantes(estudiante);
-    }
+  const handleEliminarEstudiante = (id) => {
+    const nuevosEstudiantes = estudiantes.filter((estudiante) => estudiante.id !== id);
+    setEstudiantes(nuevosEstudiantes);
 
-    const cargueEstudiantes = async () => {
-        const datos = await getEstudiantes()
-        setEstudiantes(datos);
-    }
+    // Eliminar tutorías asociadas al estudiante eliminado
+    const nuevasTutorias = tutorias.filter((tutoria) => tutoria.estudiante.id !== id);
+    setTutorias(nuevasTutorias);
+  };
 
-    useEffect(()=>{
-        cargueEstudiantes();
-    },[])
+  const handleAgendarTutoria = (tutoria) => {
+    setTutorias([...tutorias, tutoria]);
+  };
 
-    const actualizarEstudiante = (id, estudianteActualizado) => {
-        const nuevosEstudiantes = estudiantes.map((estudiante) =>
-            estudiante.id === id ? estudianteActualizado : estudiante
-        );
-        setEstudiantes(nuevosEstudiantes);
-    };
+  const handleEliminarTutoria = (tutoriaId) => {
+    const nuevasTutorias = tutorias.filter((tutoria) => tutoria.id !== tutoriaId);
+    setTutorias(nuevasTutorias);
+  };
 
-    const eliminarEstudiante = (id) => {
-        const nuevosEstudiantes = estudiantes.filter(
-            (estudiante) => estudiante.id !== id
-        );
-        setEstudiantes(nuevosEstudiantes);
-    };
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
 
-    return (
-        <>
-            <FormularioEstudiante agregar={agregarEstudiante} actualizarEstudiante={actualizarEstudiante} />
-            <TablaEstudiante listaEstudiantes={estudiantes} actualizarEstudiante={actualizarEstudiante} eliminarEstudiante={eliminarEstudiante} />
-        </>
-    )
-} 
+  return (
+    <>
+      <nav>
+        <ul className="nav nav-tabs">
+          <li className="nav-item">
+            <button
+              className={`nav-link ${activeTab === "registroEstudiante" ? "active" : ""}`}
+              onClick={() => handleTabChange("registroEstudiante")}
+            >
+              Registro de Estudiantes
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className={`nav-link ${activeTab === "listaEstudiantes" ? "active" : ""}`}
+              onClick={() => handleTabChange("listaEstudiantes")}
+            >
+              Lista de Estudiantes
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className={`nav-link ${activeTab === "registroTutoria" ? "active" : ""}`}
+              onClick={() => handleTabChange("registroTutoria")}
+            >
+              Registro de Tutorías
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className={`nav-link ${activeTab === "listaTutorias" ? "active" : ""}`}
+              onClick={() => handleTabChange("listaTutorias")}
+            >
+              Lista de Tutorías
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      {activeTab === "registroEstudiante" && (
+        <FormularioEstudiante agregarEstudiante={handleAgregarEstudiante} />
+      )}
+      {activeTab === "listaEstudiantes" && (
+        <TablaEstudiante
+          estudiantes={estudiantes}
+          eliminarEstudiante={handleEliminarEstudiante}
+        />
+      )}
+      {activeTab === "registroTutoria" && (
+        <FormularioTutoria
+          estudiantes={estudiantes}
+          agendarTutoria={handleAgendarTutoria}
+        />
+      )}
+      {activeTab === "listaTutorias" && (
+        <TablaTutoria tutorias={tutorias} eliminarTutoria={handleEliminarTutoria} />
+      )}
+    </>
+  );
+};
